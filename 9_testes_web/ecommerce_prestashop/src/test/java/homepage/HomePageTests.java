@@ -148,6 +148,11 @@ public class HomePageTests extends BaseTests {
 		incluirProdutoNoCarrinho_ProdutoIncluidoComSucesso();
 		
 		CarrinhoPage carrinhoPage = modalProdutoPage.clicarBotaoProceedToCheckout();
+		
+		//Teste
+		
+		//Validar todos elementos da tela
+		
 	}
 
 }
