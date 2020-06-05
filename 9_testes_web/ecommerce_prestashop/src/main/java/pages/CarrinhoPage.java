@@ -37,5 +37,42 @@ public class CarrinhoPage {
 	public CarrinhoPage(WebDriver driver) {
 		this.driver = driver;
 	}
+	
+    
+
+
+	public String obter_nomeProduto() {
+		return driver.findElement(nomeProduto).getText();
+	}
+	
+	public String obter_precoProduto() {
+		return driver.findElement(precoProduto).getText();
+	}
+    
+	public String obter_tamanhoProduto() {
+		return driver.findElement(tamanhoProduto).getText();
+	}
+    
+/*
+    
+corProduto 
+    
+input_quantidadeProduto
+    
+subtotalProduto 
+    
+numeroItensTotal 
+    
+subtotalTotal 
+    
+shippingTotal 
+    
+totalTaxExclTotal 
+    
+totalTaxIncTotal
+    
+taxesTotal 
+
+*/
 
 }
