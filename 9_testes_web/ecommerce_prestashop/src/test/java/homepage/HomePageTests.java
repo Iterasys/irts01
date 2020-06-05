@@ -1,7 +1,8 @@
 package homepage;
 
-//import static org.hamcrest.MatcherAssert.assertThat;
-//import static org.hamcrest.Matchers.is;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.is;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -20,17 +21,17 @@ public class HomePageTests extends BaseTests {
 	@Test
 	public void testContarProdutos_oitoProdutosDiferentes() {
 		carregarPaginaInicial();
-		//assertThat(homePage.contarProdutos(), is(8));
-		assertEquals(8, homePage.contarProdutos());		
+		assertThat(homePage.contarProdutos(), is(8));
+		//assertEquals(8, homePage.contarProdutos());		
 	}
 
-	/*
+	
 	@Test
 	public void testValidarCarrinhoZerado_ZeroItensNoCarrinho() {
 		int produtosNoCarrinho = homePage.obterQuantidadeProdutosNoCarrinho();
 		assertThat(produtosNoCarrinho, is(0));
 	}
-	*/
+	
 
 	ProdutoPage produtoPage;
 	String nomeProduto_ProdutoPage;
@@ -53,16 +54,12 @@ public class HomePageTests extends BaseTests {
 		System.out.println(nomeProduto_ProdutoPage);
 		System.out.println(precoProduto_ProdutoPage);
 
-		/*
+		
 		assertThat(nomeProduto_HomePage.toUpperCase(), is(nomeProduto_ProdutoPage.toUpperCase()));
 		assertThat(precoProduto_HomePage, is(precoProduto_ProdutoPage));
-		
-		
-		
-		*/
-		
-		assertEquals(nomeProduto_HomePage.toUpperCase(), (nomeProduto_ProdutoPage.toUpperCase()));
-		assertEquals(precoProduto_HomePage, (precoProduto_ProdutoPage));
+				
+		//assertEquals(nomeProduto_HomePage.toUpperCase(), (nomeProduto_ProdutoPage.toUpperCase()));
+		//assertEquals(precoProduto_HomePage, (precoProduto_ProdutoPage));
 
 	}
 
@@ -81,15 +78,13 @@ public class HomePageTests extends BaseTests {
 		loginPage.clicarBotaoSignIn();
 
 		// Validar se o usuário está logado de fato
-		//assertThat(homePage.estaLogado("Marcelo Bittencourt"), is(true));
-		
-		assertTrue(homePage.estaLogado("Marcelo Bittencourt"));
+		assertThat(homePage.estaLogado("Marcelo Bittencourt"), is(true));		
+		//assertTrue(homePage.estaLogado("Marcelo Bittencourt"));
 
 		carregarPaginaInicial();
 
 	}
 
-	/*
 	ModalProdutoPage modalProdutoPage;
 	
 	@Test
@@ -171,6 +166,5 @@ public class HomePageTests extends BaseTests {
 		//Validar todos elementos da tela
 		
 	}
-	*/
-
+	
 }
