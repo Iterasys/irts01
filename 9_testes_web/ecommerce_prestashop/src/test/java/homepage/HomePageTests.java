@@ -1,14 +1,24 @@
 package homepage;
 
+//Importações Hamcrest (opcional). Pode utilizar ao invés disso os asserts do JUnit (4 ou 5) conforme desejar
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+//Importações JUnit 5
+//Asserts
+//import static org.junit.jupiter.api.Assertions.assertEquals;
+//import static org.junit.jupiter.api.Assertions.assertTrue;
+//Annotation Test
+import org.junit.jupiter.api.Test;
+
+//Importações JUnit 4
+//Asserts
+//import static org.junit.Assert.assertEquals;
+//import static org.junit.Assert.assertTrue;
+//Annotation Test
+//import org.junit.Test;
 
 import java.util.List;
-
-import org.junit.jupiter.api.Test;
 
 import base.BaseTests;
 import pages.CarrinhoPage;
@@ -22,7 +32,7 @@ public class HomePageTests extends BaseTests {
 	public void testContarProdutos_oitoProdutosDiferentes() {
 		carregarPaginaInicial();
 		assertThat(homePage.contarProdutos(), is(8));
-		//assertEquals(8, homePage.contarProdutos());		
+//		assertEquals(8, homePage.contarProdutos());		
 	}
 
 	
@@ -30,12 +40,12 @@ public class HomePageTests extends BaseTests {
 	public void testValidarCarrinhoZerado_ZeroItensNoCarrinho() {
 		int produtosNoCarrinho = homePage.obterQuantidadeProdutosNoCarrinho();
 		assertThat(produtosNoCarrinho, is(0));
+//		assertEquals(0, produtosNoCarrinho);
 	}
 	
 
 	ProdutoPage produtoPage;
 	String nomeProduto_ProdutoPage;
-
 	
 	@Test
 	public void testValidarDetalhesDoProduto_DescricaoEValorIguais() {
@@ -53,13 +63,12 @@ public class HomePageTests extends BaseTests {
 
 		System.out.println(nomeProduto_ProdutoPage);
 		System.out.println(precoProduto_ProdutoPage);
-
 		
 		assertThat(nomeProduto_HomePage.toUpperCase(), is(nomeProduto_ProdutoPage.toUpperCase()));
 		assertThat(precoProduto_HomePage, is(precoProduto_ProdutoPage));
 				
-		//assertEquals(nomeProduto_HomePage.toUpperCase(), (nomeProduto_ProdutoPage.toUpperCase()));
-		//assertEquals(precoProduto_HomePage, (precoProduto_ProdutoPage));
+//		assertEquals(nomeProduto_HomePage.toUpperCase(), (nomeProduto_ProdutoPage.toUpperCase()));
+//		assertEquals(precoProduto_HomePage, (precoProduto_ProdutoPage));
 
 	}
 
@@ -79,7 +88,7 @@ public class HomePageTests extends BaseTests {
 
 		// Validar se o usuário está logado de fato
 		assertThat(homePage.estaLogado("Marcelo Bittencourt"), is(true));		
-		//assertTrue(homePage.estaLogado("Marcelo Bittencourt"));
+//		assertTrue(homePage.estaLogado("Marcelo Bittencourt"));
 
 		carregarPaginaInicial();
 
@@ -127,13 +136,15 @@ public class HomePageTests extends BaseTests {
 		modalProdutoPage = produtoPage.clicarBotaoAddToCart();
 
 		// Validações
-
-		assertTrue(modalProdutoPage.obterMensagemProdutoAdicionado()
-				.endsWith("Product successfully added to your shopping cart"));
+		assertThat(modalProdutoPage.obterMensagemProdutoAdicionado()
+				.endsWith("Product successfully added to your shopping cart"), is(true));
+//		assertTrue(modalProdutoPage.obterMensagemProdutoAdicionado()
+//				.endsWith("Product successfully added to your shopping cart"));
 
 		System.out.println();
 
 		assertThat(modalProdutoPage.obterDescricaoProduto().toUpperCase(), is(nomeProduto_ProdutoPage.toUpperCase()));
+//		assertEquals((nomeProduto_ProdutoPage.toUpperCase()), modalProdutoPage.obterDescricaoProduto().toUpperCase());
 
 		String precoProdutoString = modalProdutoPage.obterPrecoProduto();
 		precoProdutoString = precoProdutoString.replace("$", "");
@@ -143,6 +154,10 @@ public class HomePageTests extends BaseTests {
 		assertThat(modalProdutoPage.obterCorProduto(), is(corProduto));
 		assertThat(modalProdutoPage.obterQuantidadeProduto(), is(Integer.toString(quantidadeProduto)));
 
+//		assertEquals(tamanhoProduto, modalProdutoPage.obterTamanhoProduto());
+//		assertEquals(corProduto, modalProdutoPage.obterCorProduto());
+//		assertEquals(Integer.toString(quantidadeProduto), modalProdutoPage.obterQuantidadeProduto());
+		
 		String subtotalString = modalProdutoPage.obterSubtotal();
 		subtotalString = subtotalString.replace("$", "");
 		Double subtotal = Double.parseDouble(subtotalString);
@@ -150,6 +165,7 @@ public class HomePageTests extends BaseTests {
 		Double subtotalCalculado = quantidadeProduto * precoProduto;
 
 		assertThat(subtotal, is(subtotalCalculado));
+//		assertEquals(subtotalCalculado, subtotal);
 
 	}
 	
