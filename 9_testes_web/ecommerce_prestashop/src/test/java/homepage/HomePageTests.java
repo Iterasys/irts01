@@ -35,18 +35,16 @@ public class HomePageTests extends BaseTests {
 //		assertEquals(8, homePage.contarProdutos());		
 	}
 
-	
 	@Test
 	public void testValidarCarrinhoZerado_ZeroItensNoCarrinho() {
 		int produtosNoCarrinho = homePage.obterQuantidadeProdutosNoCarrinho();
 		assertThat(produtosNoCarrinho, is(0));
 //		assertEquals(0, produtosNoCarrinho);
 	}
-	
 
 	ProdutoPage produtoPage;
 	String nomeProduto_ProdutoPage;
-	
+
 	@Test
 	public void testValidarDetalhesDoProduto_DescricaoEValorIguais() {
 		int indice = 0;
@@ -63,10 +61,10 @@ public class HomePageTests extends BaseTests {
 
 		System.out.println(nomeProduto_ProdutoPage);
 		System.out.println(precoProduto_ProdutoPage);
-		
+
 		assertThat(nomeProduto_HomePage.toUpperCase(), is(nomeProduto_ProdutoPage.toUpperCase()));
 		assertThat(precoProduto_HomePage, is(precoProduto_ProdutoPage));
-				
+
 //		assertEquals(nomeProduto_HomePage.toUpperCase(), (nomeProduto_ProdutoPage.toUpperCase()));
 //		assertEquals(precoProduto_HomePage, (precoProduto_ProdutoPage));
 
@@ -87,7 +85,7 @@ public class HomePageTests extends BaseTests {
 		loginPage.clicarBotaoSignIn();
 
 		// Validar se o usuário está logado de fato
-		assertThat(homePage.estaLogado("Marcelo Bittencourt"), is(true));		
+		assertThat(homePage.estaLogado("Marcelo Bittencourt"), is(true));
 //		assertTrue(homePage.estaLogado("Marcelo Bittencourt"));
 
 		carregarPaginaInicial();
@@ -95,7 +93,7 @@ public class HomePageTests extends BaseTests {
 	}
 
 	ModalProdutoPage modalProdutoPage;
-	
+
 	@Test
 	public void incluirProdutoNoCarrinho_ProdutoIncluidoComSucesso() {
 
@@ -157,7 +155,7 @@ public class HomePageTests extends BaseTests {
 //		assertEquals(tamanhoProduto, modalProdutoPage.obterTamanhoProduto());
 //		assertEquals(corProduto, modalProdutoPage.obterCorProduto());
 //		assertEquals(Integer.toString(quantidadeProduto), modalProdutoPage.obterQuantidadeProduto());
-		
+
 		String subtotalString = modalProdutoPage.obterSubtotal();
 		subtotalString = subtotalString.replace("$", "");
 		Double subtotal = Double.parseDouble(subtotalString);
@@ -168,19 +166,19 @@ public class HomePageTests extends BaseTests {
 //		assertEquals(subtotalCalculado, subtotal);
 
 	}
-	
+
 	@Test
 	public void IrParaCarrinho_InformacoesPersistidas() {
-		//--Pré-condições
-		//Produto incluído na tela ModalProdutoPage
+		// --Pré-condições
+		// Produto incluído na tela ModalProdutoPage
 		incluirProdutoNoCarrinho_ProdutoIncluidoComSucesso();
-		
+
 		CarrinhoPage carrinhoPage = modalProdutoPage.clicarBotaoProceedToCheckout();
-		
-		//Teste
-		
-		//Validar todos elementos da tela
-		
+
+		// Teste
+
+		// Validar todos elementos da tela
+
 	}
-	
+
 }

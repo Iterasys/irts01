@@ -29,10 +29,13 @@ public class ModalProdutoPage {
 	}
 
 	public String obterMensagemProdutoAdicionado() {
-		FluentWait wait = new FluentWait(driver).withTimeout(Duration.ofSeconds(5)).pollingEvery(Duration.ofSeconds(1))
-				.ignoring(NoSuchElementException.class);
-		wait.until(ExpectedConditions.visibilityOfElementLocated(mensagemProdutoAdicionado));
 
+		FluentWait wait = new FluentWait(driver)
+				.withTimeout(Duration.ofSeconds(5))
+				.pollingEvery(Duration.ofSeconds(1))
+				.ignoring(NoSuchElementException.class);				
+		wait.until(ExpectedConditions.visibilityOfElementLocated(mensagemProdutoAdicionado));
+		
 		return driver.findElement(mensagemProdutoAdicionado).getText();
 	}
 
