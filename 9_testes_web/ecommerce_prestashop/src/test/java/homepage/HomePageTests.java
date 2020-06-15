@@ -317,6 +317,15 @@ public class HomePageTests extends BaseTests {
 		//Validar valores da tela
 		assertTrue(pedidoPage.obter_textoPedidoConfirmado().endsWith("YOUR ORDER IS CONFIRMED"));		
 		//assertThat(pedidoPage.obter_textoPedidoConfirmado().toUpperCase(), is("YOUR ORDER IS CONFIRMED"));
+		
+		assertThat(pedidoPage.obter_email(), is("marcelo@teste.com"));
+		
+		assertThat(pedidoPage.obter_totalProdutos(), is(esperado_subtotalProduto));
+		
+		assertThat(pedidoPage.obter_totalTaxIncl(), is(esperado_totalTaxIncTotal));
+		
+		assertThat(pedidoPage.obter_metodoPagamento(), is("check"));
+		
 	}
 
 
