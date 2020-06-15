@@ -4,6 +4,7 @@ package homepage;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 //Importações JUnit 5
 //Asserts
@@ -186,6 +187,8 @@ public class HomePageTests extends BaseTests {
 	Double esperado_totalTaxIncTotal = esperado_totalTaxExclTotal;
 	Double esperado_taxesTotal = 0.00;	
 	
+	String esperado_nomeCliente = "Marcelo Bittencourt";
+	
 	CarrinhoPage carrinhoPage;
 	
 	@Test
@@ -271,6 +274,19 @@ public class HomePageTests extends BaseTests {
 		
 		//Validar Informações na tela
 		assertThat(Funcoes.removeCifraoDevolveDouble(checkoutPage.obter_totalTaxIncTotal()), is(esperado_totalTaxIncTotal));
+		//assertThat(checkoutPage.obter_nomeCliente(), is(esperado_nomeCliente));
+		assertTrue(checkoutPage.obter_nomeCliente().startsWith(esperado_nomeCliente));
+		
+		
+		checkoutPage.clicarBotaoContinueAddress();
+		
+		String encontrado_shippingValor = checkoutPage.obter_shippingValor();
+		encontrado_shippingValor = Funcoes.removeTexto(encontrado_shippingValor, " tax excl.");
+		Double encontrado_shippingValor_Double = Funcoes.removeCifraoDevolveDouble(encontrado_shippingValor);
+		
+		assertThat(encontrado_shippingValor_Double, is(esperado_shippingTotal) );	
+		
+		checkoutPage.clicarBotaoContinueShipping();
 		
 	}
 
