@@ -193,7 +193,7 @@ public class HomePageTests extends BaseTests {
 	CarrinhoPage carrinhoPage;
 	
 	@Test
-	public void IrParaCarrinho_InformacoesPersistidas() {
+	public void testIrParaCarrinho_InformacoesPersistidas() {
 		// --Pré-condições
 		// Produto incluído na tela ModalProdutoPage
 		testIncluirProdutoNoCarrinho_ProdutoIncluidoComSucesso();
@@ -260,11 +260,11 @@ public class HomePageTests extends BaseTests {
 	CheckoutPage checkoutPage;
 	
 	@Test
-	public void IrParaCheckout_FreteMeioPagamentoEnderecoListadosOk() {
+	public void testIrParaCheckout_FreteMeioPagamentoEnderecoListadosOk() {
 		//Pré-condições
 		
 		//Produto disponível no carrinho de compras
-		IrParaCarrinho_InformacoesPersistidas();
+		testIrParaCarrinho_InformacoesPersistidas();
 		
 		//Teste
 		
@@ -305,10 +305,10 @@ public class HomePageTests extends BaseTests {
 	}
 	
 	@Test
-	public void finalizarPedido_pedidoFinalizadoComSucesso() {
+	public void testFinalizarPedido_pedidoFinalizadoComSucesso() {
 		//Pré-condições
 		//Checkout completamente concluído
-		IrParaCheckout_FreteMeioPagamentoEnderecoListadosOk();
+		testIrParaCheckout_FreteMeioPagamentoEnderecoListadosOk();
 		
 		//Teste
 		//Clicar no botão para confirmar o pedido
