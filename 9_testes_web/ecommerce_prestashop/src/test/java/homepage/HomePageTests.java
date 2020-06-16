@@ -100,7 +100,7 @@ public class HomePageTests extends BaseTests {
 	ModalProdutoPage modalProdutoPage;
 
 	@Test
-	public void incluirProdutoNoCarrinho_ProdutoIncluidoComSucesso() {
+	public void testIncluirProdutoNoCarrinho_ProdutoIncluidoComSucesso() {
 
 		String tamanhoProduto = "M";
 		String corProduto = "Black";
@@ -196,7 +196,7 @@ public class HomePageTests extends BaseTests {
 	public void IrParaCarrinho_InformacoesPersistidas() {
 		// --Pré-condições
 		// Produto incluído na tela ModalProdutoPage
-		incluirProdutoNoCarrinho_ProdutoIncluidoComSucesso();
+		testIncluirProdutoNoCarrinho_ProdutoIncluidoComSucesso();
 
 		carrinhoPage = modalProdutoPage.clicarBotaoProceedToCheckout();
 
