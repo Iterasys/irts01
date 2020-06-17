@@ -12,6 +12,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 //import static org.junit.jupiter.api.Assertions.assertTrue;
 //Annotation Test
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvFileSource;
 
 //Importações JUnit 4
 //Asserts
@@ -95,6 +97,38 @@ public class HomePageTests extends BaseTests {
 
 		carregarPaginaInicial();
 
+	}
+	
+	@ParameterizedTest
+	@CsvFileSource(resources = "/massaTeste_Login.csv", numLinesToSkip = 1, delimiter = ';')
+	public void testLogin_UsuarioLogadoComDadosValidos(String nomeTeste, String email, 
+			String password, String nomeUsuario, String resultado) {
+		// Clicar no botão Sign In na home page
+		loginPage = homePage.clicarBotaoSignIn();
+
+		// Preencher usuario e senha
+		loginPage.preencherEmail(email);
+		loginPage.preencherPassword(password);
+
+		// Clicar no botão Sign In para logar
+		loginPage.clicarBotaoSignIn();
+		
+		boolean esperado_loginOK;
+		if (resultado.equals("positivo"))
+			esperado_loginOK = true;
+		else
+			esperado_loginOK = false;
+
+		// Validar se o usuário está logado de fato
+		assertThat(homePage.estaLogado(nomeUsuario), is(esperado_loginOK));
+//		assertTrue(homePage.estaLogado("Marcelo Bittencourt"));
+		
+		capturarTela(nomeTeste, resultado);
+		
+		if (esperado_loginOK)
+			homePage.clicarBotaoSignOut();
+
+		carregarPaginaInicial();
 	}
 
 	ModalProdutoPage modalProdutoPage;
