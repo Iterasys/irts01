@@ -11,7 +11,7 @@ public class HomePage {
 
 	private WebDriver driver;
 
-	List<WebElement> listaProdutos = new ArrayList();
+	List<WebElement> listaProdutos = new ArrayList<WebElement>();	
 
 	private By textoProdutosNoCarrinho = By.className("cart-products-count");
 
