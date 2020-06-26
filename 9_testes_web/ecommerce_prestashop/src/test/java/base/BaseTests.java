@@ -44,7 +44,7 @@ public class BaseTests {
 	}
 
 	public void capturarTela(String nomeTeste, String resultado) {
-		var camera = (TakesScreenshot) driver;
+		TakesScreenshot camera = (TakesScreenshot) driver;
 		File capturaDeTela = camera.getScreenshotAs(OutputType.FILE);
 		try {
 			Files.move(capturaDeTela, new File("resources/screenshots/" + nomeTeste + "_" + resultado + ".png"));

@@ -1,12 +1,12 @@
 package homepage;
 
-//Importações Hamcrest (opcional). Pode utilizar ao invés disso os asserts do JUnit (4 ou 5) conforme desejar
+//Importaï¿½ï¿½es Hamcrest (opcional). Pode utilizar ao invï¿½s disso os asserts do JUnit (4 ou 5) conforme desejar
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-//Importações JUnit 5
+//Importaï¿½ï¿½es JUnit 5
 //Asserts
 //import static org.junit.jupiter.api.Assertions.assertEquals;
 //import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -15,7 +15,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvFileSource;
 
-//Importações JUnit 4
+//Importaï¿½ï¿½es JUnit 4
 //Asserts
 //import static org.junit.Assert.assertEquals;
 //import static org.junit.Assert.assertTrue;
@@ -81,17 +81,17 @@ public class HomePageTests extends BaseTests {
 
 	@Test
 	public void testLoginComSucesso_UsuarioLogado() {
-		// Clicar no botão Sign In na home page
+		// Clicar no botï¿½o Sign In na home page
 		loginPage = homePage.clicarBotaoSignIn();
 
 		// Preencher usuario e senha
 		loginPage.preencherEmail("marcelo@teste.com");
 		loginPage.preencherPassword("marcelo");
 
-		// Clicar no botão Sign In para logar
+		// Clicar no botï¿½o Sign In para logar
 		loginPage.clicarBotaoSignIn();
 
-		// Validar se o usuário está logado de fato
+		// Validar se o usuï¿½rio estï¿½ logado de fato
 		assertThat(homePage.estaLogado("Marcelo Bittencourt"), is(true));
 //		assertTrue(homePage.estaLogado("Marcelo Bittencourt"));
 
@@ -103,14 +103,14 @@ public class HomePageTests extends BaseTests {
 	@CsvFileSource(resources = "/massaTeste_Login.csv", numLinesToSkip = 1, delimiter = ';')
 	public void testLogin_UsuarioLogadoComDadosValidos(String nomeTeste, String email, 
 			String password, String nomeUsuario, String resultado) {
-		// Clicar no botão Sign In na home page
+		// Clicar no botï¿½o Sign In na home page
 		loginPage = homePage.clicarBotaoSignIn();
 
 		// Preencher usuario e senha
 		loginPage.preencherEmail(email);
 		loginPage.preencherPassword(password);
 
-		// Clicar no botão Sign In para logar
+		// Clicar no botï¿½o Sign In para logar
 		loginPage.clicarBotaoSignIn();
 		
 		boolean esperado_loginOK;
@@ -119,7 +119,7 @@ public class HomePageTests extends BaseTests {
 		else
 			esperado_loginOK = false;
 
-		// Validar se o usuário está logado de fato
+		// Validar se o usuï¿½rio estï¿½ logado de fato
 		assertThat(homePage.estaLogado(nomeUsuario), is(esperado_loginOK));
 //		assertTrue(homePage.estaLogado("Marcelo Bittencourt"));
 		
@@ -140,8 +140,8 @@ public class HomePageTests extends BaseTests {
 		String corProduto = "Black";
 		int quantidadeProduto = 2;
 
-		// --Pré-condição
-		// usuário logado
+		// --Prï¿½-condiï¿½ï¿½o
+		// usuï¿½rio logado
 		if (!homePage.estaLogado("Marcelo Bittencourt")) {
 			testLoginComSucesso_UsuarioLogado();
 		}
@@ -172,7 +172,7 @@ public class HomePageTests extends BaseTests {
 		// Adicionar no carrinho
 		modalProdutoPage = produtoPage.clicarBotaoAddToCart();
 
-		// Validações
+		// Validaï¿½ï¿½es
 		assertThat(modalProdutoPage.obterMensagemProdutoAdicionado()
 				.endsWith("Product successfully added to your shopping cart"), is(true));
 //		assertTrue(modalProdutoPage.obterMensagemProdutoAdicionado()
@@ -183,9 +183,15 @@ public class HomePageTests extends BaseTests {
 		assertThat(modalProdutoPage.obterDescricaoProduto().toUpperCase(), is(nomeProduto_ProdutoPage.toUpperCase()));
 //		assertEquals((nomeProduto_ProdutoPage.toUpperCase()), modalProdutoPage.obterDescricaoProduto().toUpperCase());
 
+		/*
 		String precoProdutoString = modalProdutoPage.obterPrecoProduto();
 		precoProdutoString = precoProdutoString.replace("$", "");
 		Double precoProduto = Double.parseDouble(precoProdutoString);
+		 */
+//		String precoProdutoString = modalProdutoPage.obterPrecoProduto();
+//		precoProdutoString = precoProdutoString.replace("$", "");
+		Double precoProduto = Double.parseDouble(modalProdutoPage.obterPrecoProduto().replace("$", ""));
+
 
 		assertThat(modalProdutoPage.obterTamanhoProduto(), is(tamanhoProduto));
 		assertThat(modalProdutoPage.obterCorProduto(), is(corProduto));
@@ -228,8 +234,8 @@ public class HomePageTests extends BaseTests {
 	
 	@Test
 	public void testIrParaCarrinho_InformacoesPersistidas() {
-		// --Pré-condições
-		// Produto incluído na tela ModalProdutoPage
+		// --Prï¿½-condiï¿½ï¿½es
+		// Produto incluï¿½do na tela ModalProdutoPage
 		testIncluirProdutoNoCarrinho_ProdutoIncluidoComSucesso();
 
 		carrinhoPage = modalProdutoPage.clicarBotaoProceedToCheckout();
@@ -255,7 +261,7 @@ public class HomePageTests extends BaseTests {
 		System.out.println(Funcoes.removeCifraoDevolveDouble(carrinhoPage.obter_totalTaxIncTotal()));
 		System.out.println(Funcoes.removeCifraoDevolveDouble(carrinhoPage.obter_taxesTotal()));
 		
-		//Asserções Hamcrest
+		//Asserï¿½ï¿½es Hamcrest
 		assertThat(carrinhoPage.obter_nomeProduto(), is(esperado_nomeProduto));
 		assertThat(Funcoes.removeCifraoDevolveDouble(carrinhoPage.obter_precoProduto()), is(esperado_precoProduto));
 		assertThat(carrinhoPage.obter_tamanhoProduto(),is(esperado_tamanhoProduto));
@@ -272,7 +278,7 @@ public class HomePageTests extends BaseTests {
 		assertThat(Funcoes.removeCifraoDevolveDouble(carrinhoPage.obter_taxesTotal()), is(esperado_taxesTotal));		
 		
 		
-		//Asserção JUnit
+		//Asserï¿½ï¿½o JUnit
 		/*
 		assertEquals(esperado_nomeProduto, carrinhoPage.obter_nomeProduto());
 		assertEquals(esperado_precoProduto, Funcoes.removeCifraoDevolveDouble(carrinhoPage.obter_precoProduto()));
@@ -295,19 +301,19 @@ public class HomePageTests extends BaseTests {
 	
 	@Test
 	public void testIrParaCheckout_FreteMeioPagamentoEnderecoListadosOk() {
-		//Pré-condições
+		//Prï¿½-condiï¿½ï¿½es
 		
-		//Produto disponível no carrinho de compras
+		//Produto disponï¿½vel no carrinho de compras
 		testIrParaCarrinho_InformacoesPersistidas();
 		
 		//Teste
 		
-		//Clicar no botão
+		//Clicar no botï¿½o
 		checkoutPage = carrinhoPage.clicarBotaoProceedToCheckout();
 		
-		//Preencher informações
+		//Preencher informaï¿½ï¿½es
 		
-		//Validar Informações na tela
+		//Validar Informaï¿½ï¿½es na tela
 		assertThat(Funcoes.removeCifraoDevolveDouble(checkoutPage.obter_totalTaxIncTotal()), is(esperado_totalTaxIncTotal));
 		//assertThat(checkoutPage.obter_nomeCliente(), is(esperado_nomeCliente));
 		assertTrue(checkoutPage.obter_nomeCliente().startsWith(esperado_nomeCliente));
@@ -323,7 +329,7 @@ public class HomePageTests extends BaseTests {
 		
 		checkoutPage.clicarBotaoContinueShipping();
 		
-		//Selecionar opção "Pay by Check"
+		//Selecionar opï¿½ï¿½o "Pay by Check"
 		checkoutPage.selecionarRadioPayByCheck();
 		//Validar valor do cheque (amount)
 		String encontrado_amountPayByCheck = checkoutPage.obter_amountPayByCheck();
@@ -331,7 +337,7 @@ public class HomePageTests extends BaseTests {
 		Double encontrado_amountPayByCheck_Double = Funcoes.removeCifraoDevolveDouble(encontrado_amountPayByCheck);
 		
 		assertThat( encontrado_amountPayByCheck_Double, is(esperado_totalTaxIncTotal));
-	    //Clicar na opção "I agree"
+	    //Clicar na opï¿½ï¿½o "I agree"
 		checkoutPage.selecionarCheckboxIAgree();
 		
 		assertTrue(checkoutPage.estaSelecionadoCheckboxIAgree());
@@ -340,12 +346,12 @@ public class HomePageTests extends BaseTests {
 	
 	@Test
 	public void testFinalizarPedido_pedidoFinalizadoComSucesso() {
-		//Pré-condições
-		//Checkout completamente concluído
+		//Prï¿½-condiï¿½ï¿½es
+		//Checkout completamente concluï¿½do
 		testIrParaCheckout_FreteMeioPagamentoEnderecoListadosOk();
 		
 		//Teste
-		//Clicar no botão para confirmar o pedido
+		//Clicar no botï¿½o para confirmar o pedido
 		PedidoPage pedidoPage = checkoutPage.clicarBotaoConfirmaPedido();
 		
 		//Validar valores da tela

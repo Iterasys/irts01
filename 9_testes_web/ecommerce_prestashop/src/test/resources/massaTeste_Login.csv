@@ -1,0 +1,3 @@
+nomeTeste;email;password;nomeUsuario;resultado
+loginValido;marcelo@teste.com;marcelo;Marcelo Bittencourt;positivo
+loginInvalido;marcelo@teste.com;teste123;Marcelo Bittencourt;negativo
