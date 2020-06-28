@@ -21,7 +21,7 @@ public class ModalProdutoPage {
 	private By listaValoresInformados = By.cssSelector("div.divide-right .col-md-6:nth-child(2) span strong");
 
 	private By subtotal = By.cssSelector(".cart-content p:nth-child(2) span.value");
-	
+
 	private By botaoProceedToCheckout = By.cssSelector("div.cart-content-btn a.btn-primary");
 
 	public ModalProdutoPage(WebDriver driver) {
@@ -30,12 +30,10 @@ public class ModalProdutoPage {
 
 	public String obterMensagemProdutoAdicionado() {
 
-		FluentWait wait = new FluentWait(driver)
-				.withTimeout(Duration.ofSeconds(5))
-				.pollingEvery(Duration.ofSeconds(1))
-				.ignoring(NoSuchElementException.class);				
+		FluentWait wait = new FluentWait(driver).withTimeout(Duration.ofSeconds(5)).pollingEvery(Duration.ofSeconds(1))
+				.ignoring(NoSuchElementException.class);
 		wait.until(ExpectedConditions.visibilityOfElementLocated(mensagemProdutoAdicionado));
-		
+
 		return driver.findElement(mensagemProdutoAdicionado).getText();
 	}
 
@@ -52,20 +50,26 @@ public class ModalProdutoPage {
 	}
 
 	public String obterCorProduto() {
-		return driver.findElements(listaValoresInformados).get(1).getText();
+		if (driver.findElements(listaValoresInformados).size() == 3)
+			return driver.findElements(listaValoresInformados).get(1).getText();
+		else
+			return "N/A";
 	}
 
 	public String obterQuantidadeProduto() {
-		return driver.findElements(listaValoresInformados).get(2).getText();
+		if (driver.findElements(listaValoresInformados).size() == 3)
+			return driver.findElements(listaValoresInformados).get(2).getText();
+		else 
+			return driver.findElements(listaValoresInformados).get(1).getText();
 	}
 
 	public String obterSubtotal() {
 		return driver.findElement(subtotal).getText();
 	}
-	
+
 	public CarrinhoPage clicarBotaoProceedToCheckout() {
 		driver.findElement(botaoProceedToCheckout).click();
-		return new CarrinhoPage(driver);		
+		return new CarrinhoPage(driver);
 	}
 
 }
